@@ -156,7 +156,7 @@ class CycleGANModel(BaseModel):
         """Calculate the loss for generators G_A and G_B"""
         #########################################
         cuda0 = torch.device('cuda:0')
-        weights_1 = torch.ones([3, 256, 256], dtype=torch.int, device=cuda0)
+        weights_1 = torch.ones([1, 3, 256, 256], dtype=torch.int, device=cuda0)
         #weights_1 = torch.ones(3, 256, 256) #create test weights all 1s
         #########################################
         lambda_idt = self.opt.lambda_identity
