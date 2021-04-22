@@ -197,6 +197,25 @@ class CycleGANModel(BaseModel):
                 a[0][2][lip_h][lip_w] = 2.3
                 
         weights_1 = a
+        
+        
+        
+        b = torch.ones([1, 1, 256, 256], dtype=torch.int, device=cuda0)
+        #b = torch.ones((1,1,256,256))
+        h = b.shape[2]
+        w = b.shape[3]
+        for eye_h in range(int(h*2/10),int(h*4.5/10)):
+            for eye_left in range(int(w*2/10 ),int(w*4/10)):
+                b[0][0][eye_h][eye_left] = 2.3
+            for eye_right in range(int(w*6/10 ),int(w*8/10)):
+                b[0][0][eye_h][eye_right] = 2.3
+        
+        for lip_h in range(int(h*7/10 ),int(h*8.5/10)): 
+            for lip_w in range(int(w*3.5/10 ),int(w*6.5/10)):
+                b[0][0][lip_h][lip_w] = 2.3
+        #ts_gan = torch.from_numpy(b)
+        weights_0 = b
+        
         #weights_1 = torch.ones([1, 3, 256, 256], dtype=torch.int, device=cuda0)
         #weights_1 = torch.ones(3, 256, 256) #create test weights all 1s
         #########################################
@@ -216,9 +235,9 @@ class CycleGANModel(BaseModel):
             self.loss_idt_B = 0
 
         # GAN loss D_A(G_A(A))
-        self.loss_G_A = self.criterionGAN(self.netD_A(self.fake_B), True)
+        self.loss_G_A = (self.criterionGAN(self.netD_A(self.fake_B), True)* weights_0)[weights_0 > 0].mean()
         # GAN loss D_B(G_B(B))
-        self.loss_G_B = self.criterionGAN(self.netD_B(self.fake_A), True)
+        self.loss_G_B = (self.criterionGAN(self.netD_B(self.fake_A), True)* weights_0)[weights_0 > 0].mean()
         #############################################
 #         # Forward cycle loss || G_B(G_A(A)) - A||
 #         self.loss_cycle_A = self.criterionCycle(self.rec_A, self.real_A) * lambda_A
