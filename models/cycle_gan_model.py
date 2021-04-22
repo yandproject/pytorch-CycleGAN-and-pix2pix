@@ -147,7 +147,8 @@ class CycleGANModel(BaseModel):
         for lip_h in range(int(h*7/10 ),int(h*8.5/10)): 
             for lip_w in range(int(w*3.5/10 ),int(w*6.5/10)):
                 b[0][0][lip_h][lip_w] = 2.3
-        ts_gan = torch.from_numpy(b)
+        #ts_gan = torch.from_numpy(b)
+        weights_0 = b
         
         pred_real = netD(real)
         loss_D_real = (self.criterionGAN(pred_real, True)* weights_0)[weights_0 > 0].mean()
@@ -188,7 +189,7 @@ class CycleGANModel(BaseModel):
                 a[0][0][eye_h][eye_right] = 2.3
                 a[0][1][eye_h][eye_right] = 2.3
                 a[0][2][eye_h][eye_right] = 2.3
-        
+
         for lip_h in range(int(h*7/10 ),int(h*8.5/10)): 
             for lip_w in range(int(w*3.5/10 ),int(w*6.5/10)):
                 a[0][0][lip_h][lip_w] = 2.3
