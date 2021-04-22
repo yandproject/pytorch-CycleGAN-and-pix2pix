@@ -132,11 +132,29 @@ class CycleGANModel(BaseModel):
         We also call loss_D.backward() to calculate the gradients.
         """
         # Real
+        #####################################################################
+        cuda0 = torch.device('cuda:0')
+        b = torch.ones([1, 1, 256, 256], dtype=torch.int, device=cuda0)
+        #b = torch.ones((1,1,256,256))
+        h = b.shape[2]
+        w = b.shape[3]
+        for eye_h in range(int(h*2/10),int(h*4.5/10)):
+            for eye_left in range(int(w*2/10 ),int(w*4/10)):
+                b[0][0][eye_h][eye_left] = 2.3
+            for eye_right in range(int(w*6/10 ),int(w*8/10)):
+                b[0][0][eye_h][eye_right] = 2.3
+        
+        for lip_h in range(int(h*7/10 ),int(h*8.5/10)): 
+            for lip_w in range(int(w*3.5/10 ),int(w*6.5/10)):
+                b[0][0][lip_h][lip_w] = 2.3
+        ts_gan = torch.from_numpy(b)
+        
         pred_real = netD(real)
-        loss_D_real = self.criterionGAN(pred_real, True)
+        loss_D_real = (self.criterionGAN(pred_real, True)* weights_0)[weights_0 > 0].mean()
         # Fake
         pred_fake = netD(fake.detach())
-        loss_D_fake = self.criterionGAN(pred_fake, False)
+        loss_D_fake = (self.criterionGAN(pred_fake, False)* weights_0)[weights_0 > 0].mean()
+        #########################################################################
         # Combined loss and calculate gradients
         loss_D = (loss_D_real + loss_D_fake) * 0.5
         loss_D.backward()
