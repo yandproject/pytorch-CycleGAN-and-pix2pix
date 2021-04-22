@@ -200,7 +200,7 @@ class CycleGANModel(BaseModel):
         
         
         
-        b = torch.ones([1, 1, 256, 256], dtype=torch.int, device=cuda0)
+        b = torch.ones([1, 3, 256, 256], dtype=torch.int, device=cuda0)
         #b = torch.ones((1,1,256,256))
         h = b.shape[2]
         w = b.shape[3]
