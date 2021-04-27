@@ -140,13 +140,13 @@ class CycleGANModel(BaseModel):
         w = b.shape[3]
         for eye_h in range(int(h*2/10),int(h*4.5/10)):
             for eye_left in range(int(w*2/10 ),int(w*4/10)):
-                b[0][0][eye_h][eye_left] = 10
+                b[0][0][eye_h][eye_left] = 2
             for eye_right in range(int(w*6/10 ),int(w*8/10)):
-                b[0][0][eye_h][eye_right] = 10
+                b[0][0][eye_h][eye_right] = 2
 
         for lip_h in range(int(h*7/10 ),int(h*8.5/10)): 
             for lip_w in range(int(w*3.5/10 ),int(w*6.5/10)):
-                b[0][0][lip_h][lip_w] = 10
+                b[0][0][lip_h][lip_w] = 2
           
         weights_0 = b
         pool1 = torch.nn.AvgPool2d(4)
@@ -189,19 +189,19 @@ class CycleGANModel(BaseModel):
         w = a.shape[3]
         for eye_h in range(int(h*2/10 ),int(h*4.5/10)):
             for eye_left in range(int(w*2/10 ),int(w*4/10)):
-                a[0][0][eye_h][eye_left] = 10
-                a[0][1][eye_h][eye_left] = 10
-                a[0][2][eye_h][eye_left] = 10
+                a[0][0][eye_h][eye_left] = 2
+                a[0][1][eye_h][eye_left] = 2
+                a[0][2][eye_h][eye_left] = 2
             for eye_right in range(int(w*6/10 ),int(w*8/10)):
-                a[0][0][eye_h][eye_right] = 10
-                a[0][1][eye_h][eye_right] = 10
-                a[0][2][eye_h][eye_right] = 10
+                a[0][0][eye_h][eye_right] = 2
+                a[0][1][eye_h][eye_right] = 2
+                a[0][2][eye_h][eye_right] = 2
 
         for lip_h in range(int(h*7/10 ),int(h*8.5/10)): 
             for lip_w in range(int(w*3.5/10 ),int(w*6.5/10)):
-                a[0][0][lip_h][lip_w] = 10
-                a[0][1][lip_h][lip_w] = 10
-                a[0][2][lip_h][lip_w] = 10
+                a[0][0][lip_h][lip_w] = 2
+                a[0][1][lip_h][lip_w] = 2
+                a[0][2][lip_h][lip_w] = 2
                 
         weights_1 = a        
         cuda0 = torch.device('cuda:0')
@@ -210,13 +210,13 @@ class CycleGANModel(BaseModel):
         w = b.shape[3]
         for eye_h in range(int(h*2/10),int(h*4.5/10)):
             for eye_left in range(int(w*2/10 ),int(w*4/10)):
-                b[0][0][eye_h][eye_left] = 10
+                b[0][0][eye_h][eye_left] = 2
             for eye_right in range(int(w*6/10 ),int(w*8/10)):
-                b[0][0][eye_h][eye_right] = 10
+                b[0][0][eye_h][eye_right] = 2
 
         for lip_h in range(int(h*7/10 ),int(h*8.5/10)): 
             for lip_w in range(int(w*3.5/10 ),int(w*6.5/10)):
-                b[0][0][lip_h][lip_w] = 10
+                b[0][0][lip_h][lip_w] = 2
                 
         weights_0 = b
         
