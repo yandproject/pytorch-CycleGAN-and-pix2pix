@@ -3,11 +3,11 @@ import itertools
 from util.image_pool import ImagePool
 from .base_model import BaseModel
 from . import networks
-#my comment
 import numpy as np
         
 cuda0 = torch.device('cuda:0')
-a = torch.ones([1, 3, 256, 256], dtype=torch.float, device=cuda0)
+#a = torch.ones([1, 3, 256, 256], dtype=torch.float, device=cuda0)
+a = torch.ones([1, 3, 64, 64], dtype=torch.float, device=cuda0)
 h = a.shape[2]
 w = a.shape[3]
 for eye_h in range(int(h*2/10 ),int(h*4.5/10)):
@@ -26,7 +26,9 @@ for lip_h in range(int(h*7/10 ),int(h*8.5/10)):
         a[0][2][lip_h][lip_w] = 7
 weights_1 = a        
 cuda0 = torch.device('cuda:0')
-b = torch.ones([1, 1, 256, 256], dtype=torch.float, device=cuda0)
+
+#b = torch.ones([1, 1, 256, 256], dtype=torch.float, device=cuda0)
+b = torch.ones([1, 1, 64, 64], dtype=torch.float, device=cuda0)
 h = b.shape[2]
 w = b.shape[3]
 for eye_h in range(int(h*2/10),int(h*4.5/10)):
@@ -42,12 +44,17 @@ for lip_h in range(int(h*7/10 ),int(h*8.5/10)):
 weights_0 = b
         
         
-pool1 = torch.nn.AvgPool2d(4)
-pool2 = torch.nn.AvgPool2d(2)
-pool3 = torch.nn.AvgPool2d(3,stride=1)
+#pool1 = torch.nn.AvgPool2d(4)
+#pool2 = torch.nn.AvgPool2d(2)
+#pool3 = torch.nn.AvgPool2d(3,stride=1)
+#weights_0 = pool1(weights_0)
+#weights_0 = pool2(weights_0)
+#weights_0 = pool3(weights_0)
+
+pool1 = torch.nn.AvgPool2d(2)
+pool2 = torch.nn.AvgPool2d(3, stride=1)
 weights_0 = pool1(weights_0)
 weights_0 = pool2(weights_0)
-weights_0 = pool3(weights_0)
 
 
 class CycleGANModel(BaseModel):
