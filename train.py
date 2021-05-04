@@ -49,6 +49,11 @@ if __name__ == '__main__':
         epoch_iter = 0                  # the number of training iterations in current epoch, reset to 0 every epoch
         visualizer.reset()              # reset the visualizer: make sure it saves the results to HTML at least once every epoch
         model.update_learning_rate()    # update learning rates in the beginning of every epoch.
+        
+        epoch_dic = dict()
+        for k in keys:
+          epoch_dic[k] = []
+        
         for i, data in enumerate(dataset):  # inner loop within one epoch
             iter_start_time = time.time()  # timer for computation per iteration
             if total_iters % opt.print_freq == 0:
@@ -67,7 +72,7 @@ if __name__ == '__main__':
             if total_iters % opt.print_freq == 0:    # print training losses and save logging information to the disk
                 losses = model.get_current_losses()
                 for k, v in losses.items():
-                    d[k].append(v) #save losses into dictionary
+                    epoch_dic[k].append(v) #save losses into dictionary
                 t_comp = (time.time() - iter_start_time) / opt.batch_size
                 visualizer.print_current_losses(epoch, epoch_iter, losses, t_comp, t_data)
                 if opt.display_id > 0:
@@ -84,6 +89,10 @@ if __name__ == '__main__':
             model.save_networks('latest')
             model.save_networks(epoch)
 
+        for k in keys:
+            epoch_dic[k] = np.array(epoch_dic[k])
+            d[k].append(epoch_dic[k].mean())
+        print('Loss dictionary: ', d)
         print('End of epoch %d / %d \t Time Taken: %d sec' % (epoch, opt.n_epochs + opt.n_epochs_decay, time.time() - epoch_start_time))
   
 #Graphs for losses
