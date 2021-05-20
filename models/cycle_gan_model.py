@@ -42,12 +42,16 @@ for lip_h in range(int(h*7/10 ),int(h*8.5/10)):
 weights_0 = b
         
         
-pool1 = torch.nn.AvgPool2d(4)
-pool2 = torch.nn.AvgPool2d(2)
-pool3 = torch.nn.AvgPool2d(3,stride=1)
+pool1 = torch.nn.AvgPool2d(4, stride=2, padding=1)
+pool2 = torch.nn.AvgPool2d(4, stride=2, padding=1)
+pool3 = torch.nn.AvgPool2d(4, stride=2, padding=1)
+pool4 = torch.nn.AvgPool2d(4, stride=1, padding=1)
+pool5 = torch.nn.AvgPool2d(4, stride=1, padding=1)
 weights_0 = pool1(weights_0)
 weights_0 = pool2(weights_0)
 weights_0 = pool3(weights_0)
+weights_0 = pool4(weights_0)
+weights_0 = pool5(weights_0)
 
 
 class CycleGANModel(BaseModel):
