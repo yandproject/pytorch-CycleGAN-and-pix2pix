@@ -9,35 +9,65 @@ cuda0 = torch.device('cuda:0')
 a = torch.ones([1, 3, 256, 256], dtype=torch.float, device=cuda0)
 h = a.shape[2]
 w = a.shape[3]
-for eye_h in range(int(h*2/10 ),int(h*4.5/10)):
-    for eye_left in range(int(w*2/10 ),int(w*4/10)):
-        a[0][0][eye_h][eye_left] = 7
-        a[0][1][eye_h][eye_left] = 7
-        a[0][2][eye_h][eye_left] = 7
-    for eye_right in range(int(w*6/10 ),int(w*8/10)):
-        a[0][0][eye_h][eye_right] = 7
-        a[0][1][eye_h][eye_right] = 7
-        a[0][2][eye_h][eye_right] = 7
-for lip_h in range(int(h*7/10 ),int(h*8.5/10)): 
-    for lip_w in range(int(w*3.5/10 ),int(w*6.5/10)):
-        a[0][0][lip_h][lip_w] = 7
-        a[0][1][lip_h][lip_w] = 7
-        a[0][2][lip_h][lip_w] = 7
+#JACK
+for eye_h in range(int(h*7/20 ),int(h*9/20)):
+    for eye_left in range(int(w*6/20),int(w*9/20)):
+        a[0][0][eye_h][eye_left] = 9
+        a[0][1][eye_h][eye_left] = 9
+        a[0][2][eye_h][eye_left] = 9
+    for eye_right in range(int(w*11/20 ),int(w*14/20)):
+        a[0][0][eye_h][eye_right] = 9
+        a[0][1][eye_h][eye_right] = 9
+        a[0][2][eye_h][eye_right] = 9
+
+for lip_h in range(int(h*12/20 ),int(h*14/20)): 
+    for lip_w in range(int(w*8/20 ),int(w*12/20)):
+        a[0][0][lip_h][lip_w] = 9
+        a[0][1][lip_h][lip_w] = 9
+        a[0][2][lip_h][lip_w] = 9
+#HICCUP
+# for eye_h in range(int(h*2/10 ),int(h*4.5/10)):
+#     for eye_left in range(int(w*2/10 ),int(w*4/10)):
+#         a[0][0][eye_h][eye_left] = 7
+#         a[0][1][eye_h][eye_left] = 7
+#         a[0][2][eye_h][eye_left] = 7
+#     for eye_right in range(int(w*6/10 ),int(w*8/10)):
+#         a[0][0][eye_h][eye_right] = 7
+#         a[0][1][eye_h][eye_right] = 7
+#         a[0][2][eye_h][eye_right] = 7
+# for lip_h in range(int(h*7/10 ),int(h*8.5/10)): 
+#     for lip_w in range(int(w*3.5/10 ),int(w*6.5/10)):
+#         a[0][0][lip_h][lip_w] = 7
+#         a[0][1][lip_h][lip_w] = 7
+#         a[0][2][lip_h][lip_w] = 7
 weights_1 = a        
 cuda0 = torch.device('cuda:0')
 
 b = torch.ones([1, 1, 256, 256], dtype=torch.float, device=cuda0)
 h = b.shape[2]
 w = b.shape[3]
-for eye_h in range(int(h*2/10),int(h*4.5/10)):
-    for eye_left in range(int(w*2/10 ),int(w*4/10)):
-        b[0][0][eye_h][eye_left] = 7
-    for eye_right in range(int(w*6/10 ),int(w*8/10)):
-        b[0][0][eye_h][eye_right] = 7
 
-for lip_h in range(int(h*7/10 ),int(h*8.5/10)): 
-    for lip_w in range(int(w*3.5/10 ),int(w*6.5/10)):
-        b[0][0][lip_h][lip_w] = 7
+#JACK
+for eye_h in range(int(h*7/20 ),int(h*9/20)):
+    for eye_left in range(int(w*6/20),int(w*9/20)):
+        b[0][0][eye_h][eye_left] = 9
+    for eye_right in range(int(w*11/20),int(w*14/20)):
+        b[0][0][eye_h][eye_right] = 9
+        
+for lip_h in range(int(h*12/20 ),int(h*14/20)): 
+    for lip_w in range(int(w*8/20 ),int(w*12/20)):
+        b[0][0][lip_h][lip_w] = 9
+        
+#HICCUP        
+# for eye_h in range(int(h*2/10),int(h*4.5/10)):
+#     for eye_left in range(int(w*2/10 ),int(w*4/10)):
+#         b[0][0][eye_h][eye_left] = 7
+#     for eye_right in range(int(w*6/10 ),int(w*8/10)):
+#         b[0][0][eye_h][eye_right] = 7
+
+# for lip_h in range(int(h*7/10 ),int(h*8.5/10)): 
+#     for lip_w in range(int(w*3.5/10 ),int(w*6.5/10)):
+#         b[0][0][lip_h][lip_w] = 7
                 
 weights_0 = b
         
